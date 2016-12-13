@@ -29,7 +29,7 @@ class RcloneBackend(duplicity.backend.Backend):
 		if rc != 0:
 			if os.path.isfile(os.path.join(temp_dir, remote_filename)):
 				os.remove(os.path.join(temp_dir, remote_filename))
-			raise BackendException(e)
+			raise BackendException(e.split('\n')[0])
 		os.rename(os.path.join(temp_dir, remote_filename), local_path.name)
 
 	def _put(self, source_path, remote_filename):
@@ -40,7 +40,7 @@ class RcloneBackend(duplicity.backend.Backend):
 		rc, o, e = self._subprocess(commandline)
 		if rc != 0:
 			os.rename(os.path.join(temp_dir, remote_filename), source_path.name)
-			raise BackendException(e)
+			raise BackendException(e.split('\n')[0])
 		os.rename(os.path.join(temp_dir, remote_filename), source_path.name)
 
 	def _list(self):
@@ -51,7 +51,7 @@ class RcloneBackend(duplicity.backend.Backend):
 			if e.endswith("not found\n"):
 				return filelist
 			else:
-				raise BackendException(e)
+				raise BackendException(e.split('\n')[0])
 		if not o:
 			return filelist
 		lines = o.split('\n')
@@ -64,7 +64,7 @@ class RcloneBackend(duplicity.backend.Backend):
 		commandline = "%s delete --include %s %s" % (self.rclone_cmd, remote_filename, self.remote_path)
 		rc, o, e = self._subprocess(commandline)
 		if rc != 0:
-			raise BackendException(e)
+			raise BackendException(e.split('\n')[0])
 		
 	def _subprocess(self, commandline):
 		import shlex
