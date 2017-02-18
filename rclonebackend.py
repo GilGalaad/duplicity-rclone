@@ -13,7 +13,7 @@ class RcloneBackend(duplicity.backend.Backend):
 		self.rclone_cmd = "rclone"
 		self.parsed_url = parsed_url
 		self.remote_path = self.parsed_url.path
-		
+
 		try:
 			rc, o, e = self._subprocess(self.rclone_cmd + " version")
 		except Exception:
@@ -65,7 +65,7 @@ class RcloneBackend(duplicity.backend.Backend):
 		rc, o, e = self._subprocess(commandline)
 		if rc != 0:
 			raise BackendException(e.split('\n')[0])
-		
+
 	def _subprocess(self, commandline):
 		import shlex
 		from subprocess import Popen, PIPE
