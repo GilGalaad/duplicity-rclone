@@ -15,7 +15,7 @@ class RcloneBackend(duplicity.backend.Backend):
 		self.remote_path = self.parsed_url.path
 
 		try:
-			rc, o, e = self._subprocess(self.rclone_cmd + " version")
+			self.subprocess_popen(self.rclone_cmd + " version")
 		except Exception:
 			log.FatalError("rclone not found: please install rclone", log.ErrorCode.backend_error)
 
@@ -25,7 +25,7 @@ class RcloneBackend(duplicity.backend.Backend):
 	def _get(self, remote_filename, local_path):
 		temp_dir = os.path.dirname(local_path.name)
 		commandline = "%s copy %s/%s %s" % (self.rclone_cmd, self.remote_path, remote_filename, temp_dir)
-		rc, o, e = self._subprocess(commandline)
+		rc, o, e = self.subprocess_popen(commandline)
 		if rc != 0:
 			if os.path.isfile(os.path.join(temp_dir, remote_filename)):
 				os.remove(os.path.join(temp_dir, remote_filename))
@@ -37,7 +37,7 @@ class RcloneBackend(duplicity.backend.Backend):
 		temp_filename = os.path.basename(source_path.name)
 		os.rename(source_path.name, os.path.join(temp_dir, remote_filename))
 		commandline = "%s copy --include %s %s %s" % (self.rclone_cmd, remote_filename, temp_dir, self.remote_path)
-		rc, o, e = self._subprocess(commandline)
+		rc, o, e = self.subprocess_popen(commandline)
 		if rc != 0:
 			os.rename(os.path.join(temp_dir, remote_filename), source_path.name)
 			raise BackendException(e.split('\n')[0])
@@ -46,7 +46,7 @@ class RcloneBackend(duplicity.backend.Backend):
 	def _list(self):
 		filelist = []
 		commandline = "%s ls %s" % (self.rclone_cmd, self.remote_path)
-		rc, o, e = self._subprocess(commandline)
+		rc, o, e = self.subprocess_popen(commandline)
 		if rc != 0:
 			if e.endswith("not found\n"):
 				return filelist
@@ -62,16 +62,8 @@ class RcloneBackend(duplicity.backend.Backend):
 
 	def _delete(self, remote_filename):
 		commandline = "%s delete --include %s %s" % (self.rclone_cmd, remote_filename, self.remote_path)
-		rc, o, e = self._subprocess(commandline)
+		rc, o, e = self.subprocess_popen(commandline)
 		if rc != 0:
 			raise BackendException(e.split('\n')[0])
-
-	def _subprocess(self, commandline):
-		import shlex
-		from subprocess import Popen, PIPE
-		args = shlex.split(commandline)
-		p = Popen(args, stdout=PIPE, stderr=PIPE)
-		stdout, stderr = p.communicate()
-		return p.returncode, stdout, stderr
 
 duplicity.backend.register_backend("rclone", RcloneBackend)
