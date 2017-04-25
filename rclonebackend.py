@@ -70,6 +70,8 @@ class RcloneBackend(duplicity.backend.Backend):
 		import shlex
 		from subprocess import Popen, PIPE
 		args = shlex.split(commandline)
+                private = self.munge_password(commandline)
+                log.Info(_("Reading results of '%s'") % private)
 		p = Popen(args, stdout=PIPE, stderr=PIPE)
 		stdout, stderr = p.communicate()
 		return p.returncode, stdout, stderr
