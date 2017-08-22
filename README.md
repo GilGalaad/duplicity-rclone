@@ -21,4 +21,4 @@ you can start your backup with
 ```
 duplicity /mydocuments rclone://gdrive:/mydocuments
 ```
-**Please note the slash after colon.** Some storage provider will work with or without slash after colon, but some other will not work because assume the first word is the bucket/container. But since dupicity will complain about malformed URL if a slash is not present, always put it after the colon, and the backend will remove it in the process.
+**Please note the slash after colon.** Some storage provider will work with or without slash after colon, but some other will not work because assume the first word is the bucket/container. But since duplicity will complain about malformed URL if a slash is not present, always put it after the colon, and the backend will remove it in the process.
