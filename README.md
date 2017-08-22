@@ -13,7 +13,12 @@ Since I've never wrote Python before today, use it at your own risk. Every feedb
 Install `rclonebackend.py` into duplicity backend directory. This backend provides support for prefix `rclone://`.
 
 # Usage
-Once you have configured rclone and successfully set up a remote (e.g. `gd` for Google Drive), you can start your backup with
+Once you have configured rclone and successfully set up a remote (e.g. `gdrive` for Google Drive), assuming you can list your remote files with
 ```
-duplicity /mydocuments rclone://gd:/mydocuments
+rclone ls gdrive:mydocuments
 ```
+you can start your backup with
+```
+duplicity /mydocuments rclone://gdrive:/mydocuments
+```
+**Please note the slash after colon.** Some storage provider will work with or without slash after colon, but some other will not work because assume the first word is the bucket/container. But since dupicity will complain about malformed URL if a slash is not present, always put it after the colon, and the backend will remove it in the process.
