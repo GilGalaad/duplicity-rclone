@@ -19,8 +19,8 @@ class RcloneBackend(duplicity.backend.Backend):
 		except Exception:
 			log.FatalError("rclone not found: please install rclone", log.ErrorCode.backend_error)
 
-		if parsed_url.path.startswith('//'):
-			self.remote_path = self.remote_path[2:]
+		if parsed_url.path.startswith("//"):
+			self.remote_path = self.remote_path[2:].replace(":/",":",1)
 
 	def _get(self, remote_filename, local_path):
 		temp_dir = os.path.dirname(local_path.name)
