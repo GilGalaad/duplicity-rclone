@@ -69,6 +69,7 @@ class RcloneBackend(duplicity.backend.Backend):
 	def _subprocess(self, commandline):
 		import shlex
 		from subprocess import Popen, PIPE
+		log.Info("Executing subprocess: '%s'" % commandline)
 		args = shlex.split(commandline)
 		p = Popen(args, stdout=PIPE, stderr=PIPE)
 		stdout, stderr = p.communicate()
