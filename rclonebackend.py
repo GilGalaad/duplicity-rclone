@@ -1,3 +1,15 @@
+"""
+Duplicity backend using rclone
+Rclone is a powerful command line program to sync files and directories to and from various cloud storage providers.
+
+File name: rclonebackend.py
+Author: Francesco Magno
+Date created: 10/12/2016
+Licence: GPL-3.0
+Repository: https://github.com/GilGalaad/duplicity-rclone
+Python Version: 2.7
+"""
+
 import os
 import os.path
 
