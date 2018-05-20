@@ -73,7 +73,7 @@ class RcloneBackend(duplicity.backend.Backend):
 		return filelist
 
 	def _delete(self, remote_filename):
-		commandline = "%s delete --include %s %s" % (self.rclone_cmd, remote_filename, self.remote_path)
+		commandline = "%s delete --drive-use-trash=false --include %s %s" % (self.rclone_cmd, remote_filename, self.remote_path)
 		rc, o, e = self._subprocess(commandline)
 		if rc != 0:
 			raise BackendException(e.split('\n')[0])
