@@ -27,7 +27,7 @@ class RcloneBackend(duplicity.backend.Backend):
 		self.remote_path = self.parsed_url.path
 
 		try:
-			rc, o, e = self._subprocess(self.rclone_cmd + " version")
+			rc, o, e = self._subprocess(self.rclone_cmd + " --version")
 		except Exception:
 			log.FatalError("rclone not found: please install rclone", log.ErrorCode.backend_error)
 
