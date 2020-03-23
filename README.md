@@ -10,6 +10,8 @@ Since I've never wrote Python before today, use it at your own risk. Every feedb
 
 **Update 19/05/2017:** Since Amazon banned rclone, I moved my data to Google Drive, and it works smoothly as expected.
 
+**Update 23/03/2020:** This project has been **merged into official duplicity codebase, since version 0.8.09**, so basically this will remain only for people still running version 0.7.x on older distributions.
+
 # Setup
 Install `rclonebackend.py` into duplicity backend directory. This backend provides support for prefix `rclone://`.
 
