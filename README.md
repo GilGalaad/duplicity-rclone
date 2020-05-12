@@ -4,13 +4,13 @@
 Rclone is a powerful command line program to sync files and directories to and from various cloud storage providers.
 
 At the time of deveopment, I was using duplicity v0.7.10 and Amazon Cloud Drive, but this backend should work with any storage provider supported by rclone, and with later version of duplicity.\
-I am currently running it with duplicity v0.7.17 and rclone v1.43.1, without issues.
+I am currently running it with duplicity v0.8.12 and rclone v1.51.0, without issues.
 
 Since I've never wrote Python before today, use it at your own risk. Every feedback, comment or suggestion is welcome.
 
-**Update 19/05/2017:** Since Amazon banned rclone, I moved my data to Google Drive, and it works smoothly as expected.
-
 **Update 23/03/2020:** This project has been **merged into official duplicity codebase, since version 0.8.09**, so basically this will remain only for people still running version 0.7.x on older distributions.
+
+**Update 12/05/2020:** After rclone released some new dedicated commands to handle single files, I made a new version for duplicity 0.8.x, which is a lot more efficient, and fixes a small bug. I hope this code will be merged into the official repository too. I will keep the 0.7.x branch for whoever should still need it.
 
 # Setup
 Install `rclonebackend.py` into duplicity backend directory. This backend provides support for prefix `rclone://`.
