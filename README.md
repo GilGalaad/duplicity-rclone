@@ -10,7 +10,7 @@ Since I've never wrote Python before today, use it at your own risk. Every feedb
 
 **Update 23/03/2020:** This project has been **merged into official duplicity codebase, since version 0.8.09**, so basically this will remain only for people still running version 0.7.x on older distributions.
 
-**Update 12/05/2020:** After rclone released some new dedicated commands to handle single files, I modified the backend curretnly shipped with duplicity 0.8.x, this code is a lot more efficient in dealing with the storage provider, and fixes a small bug. I hope this code will be merged into the official repository too. I will keep the 0.7.x branch for whoever should still need it.
+**Update 12/05/2020:** After rclone released some new dedicated commands to handle single files, I modified the backend currently shipped with duplicity 0.8.x, this code is a lot more efficient in dealing with the storage provider, and fixes a small bug. I hope this code will be merged into the official repository too. I will keep the 0.7.x branch for whoever should still need it.
 
 # Setup
 Install `rclonebackend.py` into duplicity backend directory. This backend provides support for prefix `rclone://`.
